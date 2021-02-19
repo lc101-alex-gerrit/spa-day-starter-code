@@ -1,7 +1,11 @@
 package org.launchcode.spaday.controllers;
 
+import org.launchcode.spaday.models.User;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -12,5 +16,17 @@ public class UserController {
     public String displayAddUserForm() {
         return "user/add";
     }
+
+    @PostMapping("")
+    public String processAddUserForm(Model model, @ModelAttribute User user, String redopassword) {
+        String password = user.getPassword();
+        if(password.equals(redopassword)) {
+            return "user/index";
+        } else {
+            model.addAttribute("error", "Passwords do not match.");
+            return "user/add";
+        }
+    }
+
 
 }

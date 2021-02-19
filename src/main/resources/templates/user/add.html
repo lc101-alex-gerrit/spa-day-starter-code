@@ -7,11 +7,11 @@
 <body>
 <form method="post" action = "/user">
     <label>User Name</label>
-    <input type = "text" name="username">
+    <input type = "text" name="username" th:value="${user.username}">
     <br>
     <br>
     <label>Email</label>
-    <input type = "email" name="email">
+    <input type = "email" name="email" th:value="${user.email}">
     <br>
     <br>
     <label>Password</label>
@@ -24,6 +24,7 @@
     <br>
     <input type = "submit">
     <br>
+    <p th:if="${error}" th:text="${error}"></p>
 </form>
 </body>
 </html>
